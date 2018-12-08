@@ -20,7 +20,7 @@ getSetorR = do
     defaultLayout $ do
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/hamlet/setor.hamlet")
+        $(whamletFile "templates/setor.hamlet")
     
 postSetorR :: Handler Html 
 postSetorR = do 

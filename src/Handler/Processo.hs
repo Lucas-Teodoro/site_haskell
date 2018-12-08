@@ -22,10 +22,10 @@ formProcesso = renderBootstrap $ Processo
 getProcessoR :: Handler Html
 getProcessoR = do 
     (widgetForm, enctype) <- generateFormPost formProcesso
-    layoutAdmin $ do
+    defaultLayout $ do
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/hamlet/processo.hamlet")
+        $(whamletFile "templates/processo.hamlet")
     
 postProcessoR :: Handler Html 
 postProcessoR = do
