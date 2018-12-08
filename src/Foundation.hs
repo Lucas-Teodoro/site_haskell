@@ -21,6 +21,8 @@ data App = App
 
 mkYesodData "App" $(parseRoutesFile "config/routes")
 
+type Form a = Html -> MForm Handler (FormResult a, Widget)
+
 instance Yesod App where
     makeLogger = return . appLogger
 
