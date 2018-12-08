@@ -2,3 +2,13 @@ Setor json
     sigla           Text
     descSetor       Text
     deriving        Show
+
+Processo json
+    autor           Text
+    ano             Int
+    numero          Int
+    assunto         Text
+    dataCriacao     Day
+    volume          Int
+    setor           SetorId
+    deriving        Show
