@@ -1,0 +1,7 @@
+<div.container>
+    <h2>
+        Cadastro de Setor
+    <div.formulario>
+        <form action=@{SetorR} method=post enctype=#{enctype}>
+            ^{widgetForm}
+            <input type="submit" value="Cadastrar Novo Setor">
