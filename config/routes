@@ -1,7 +1,8 @@
-/static StaticR Static appStatic
-
+/static                                  StaticR Static   appStatic
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
-/                 HomeR    GET
-/setor            SetorR   GET POST
+/                                        HomeR            GET
+/setor                                   SetorR           GET POST
+
+/processo                                ProcessoR        GET POST

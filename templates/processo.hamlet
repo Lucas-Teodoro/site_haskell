@@ -1,0 +1,8 @@
+<div.container>
+    <h2>
+        Cadastro de Processo
+    <div.formulario>
+        <form action=@{ProcessoR} method=post enctype=#{enctype}>
+            ^{widgetForm}
+            <input.botao type="submit" value="Cadastrar Novo Processo">
+    
