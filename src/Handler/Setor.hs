@@ -9,11 +9,11 @@ module Handler.Setor where
 import Import
 import Text.Lucius
 
-formSetor :: Form Setor
-formSetor = renderBootstrap $ Setor 
-    <$> areq textField "Descricao do Sigla: " Nothing
+formSetor :: Form (Text,Text)
+formSetor = renderDivs $ (,)
+    <$> areq textField "Sigla: " Nothing
     <*> areq textField "Descricao do Setor: " Nothing
-
+    
 getSetorR :: Handler Html
 getSetorR = do 
     (widgetForm, enctype) <- generateFormPost formSetor
@@ -26,11 +26,9 @@ postSetorR :: Handler Html
 postSetorR = do 
     ((res,_),_) <- runFormPost formSetor
     case res of 
-        FormSuccess setor -> do
-            _ <- runDB $ insert setor
-            redirect SetorR
-        x -> do 
-            defaultLayout [whamlet|
-                <h1>
-                    #{show x}
-            |]
+        FormSuccess (sg,setor) -> do
+            _ <- runDB $ insert $ Setor sg setor True
+            redirect HomeR
+        _ -> redirect SetorR
+            
+

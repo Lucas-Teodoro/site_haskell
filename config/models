@@ -1,6 +1,7 @@
 Setor json
     sigla           Text
     descSetor       Text
+    ativo           Bool
     deriving        Show
 
 Processo json
