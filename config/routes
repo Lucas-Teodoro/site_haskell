@@ -8,6 +8,7 @@
 /teste                                   TesteR               GET POST
 
 /processo                                ProcessoR        GET POST
+/lista                                   ListaProcessoR       GET
 
 /usuario                                 UsuarioR             GET POST
 /listausuarios                           ListaUsuariosR       GET

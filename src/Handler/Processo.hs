@@ -10,7 +10,7 @@ import Text.Lucius
 import Import
 
 formProcesso :: Form Processo
-formProcesso = renderBootstrap $ Processo 
+formProcesso = renderDivs $ Processo 
     <$> areq textField "Autor: " Nothing 
     <*> areq intField "Ano: " Nothing
     <*> areq intField "Numero: " Nothing
@@ -35,3 +35,12 @@ postProcessoR = do
             _ <- runDB $ insert processo
             redirect ProcessoR
         _ -> redirect ProcessoR
+
+getListaProcessoR :: Handler Html
+getListaProcessoR = do 
+    processos <- runDB $ selectList [] [Asc ProcessoAutor]
+    layoutAdmin $ do 
+        addStylesheet $ StaticR css_menu2_css
+        addStylesheet $ StaticR css_tabela_css
+        toWidget $(luciusFile "templates/homepage.lucius")
+        $(whamletFile "templates/hamlet/todosprocessos.hamlet")
