@@ -62,3 +62,40 @@ postCPPorAutorR = do
                 toWidget $(luciusFile "templates/homepage.lucius")
                 $(whamletFile "templates/hamlet/consultaprocesso.hamlet")
         _ -> redirect HomeR
+
+formConsulta' :: Form (Int,Int)
+formConsulta' = renderDivs $ (,) 
+    <$> areq intField "Numero: " Nothing
+    <*> areq intField "Ano" Nothing
+
+getConsultaPorNumR :: Handler Html
+getConsultaPorNumR = do 
+    mensagem <- getMessage
+    (widgetForm, enctype) <- generateFormPost formConsulta
+    defaultLayout $ do
+        addStylesheet $ StaticR css_menu2_css
+        toWidget $(luciusFile "templates/homepage.lucius")
+        $(whamletFile "templates/hamlet/formconsultanum.hamlet")
+
+postConsultaPorNumR :: Handler Html
+postConsultaPorNumR = do
+    mensagem <- getMessage
+    ((res,_),_) <- runFormPost formConsulta'
+    case res of 
+        FormSuccess (numero,ano) -> do
+            processos <- runDB $ selectList [ProcessoAno ==. ano, ProcessoNumero ==. numero] [Asc ProcessoId]
+            defaultLayout $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/hamlet/consultaprocesso.hamlet")
+        _ -> redirect HomeR
+
+getCPPorNumR :: Handler Html
+getCPPorNumR = do 
+    mensagem <- getMessage
+    (widgetForm, enctype) <- generateFormPost formConsulta'
+    defaultLayout $ do
+        addStylesheet $ StaticR css_menu2_css
+        toWidget $(luciusFile "templates/homepage.lucius")
+        $(whamletFile "templates/hamlet/formcpnum.hamlet")
