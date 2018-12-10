@@ -1,0 +1,22 @@
+/*
+table, th, td {
+  border: 1px solid black; 
+}*/
+th {
+  background-color:  	#F0F8FF;
+  color: black;
+/*  text-align: left !important; /
+  height: 50px; */
+}
+table {
+  width: 100%;
+  text-align: center;
+}
+td {
+  vertical-align: bottom;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+tr:hover {background-color:#90EE90;}

@@ -36,6 +36,7 @@ getListaSetoresR = do
     setores <- runDB $ selectList [] [Asc SetorDescSetor]
     defaultLayout $ do 
         addStylesheet $ StaticR css_menu2_css
+        addStylesheet $ StaticR css_tabela_css
         toWidget $(luciusFile "templates/homepage.lucius")
         $(whamletFile "templates/todossetores.hamlet")
 
