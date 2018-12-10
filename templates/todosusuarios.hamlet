@@ -1,0 +1,41 @@
+<div.container>
+    <h2>
+        Usuarios
+    <br>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Nome
+
+                <th>
+                    Email
+
+                <th>
+                    Permissao
+
+                <th>
+                    Ativo
+
+                <th>
+                    Desativar
+
+        <tbody>
+            $forall (Entity _ usuario) <- usuarios
+                <tr>
+                    <td>
+                        #{usuarioNome usuario}
+
+                    <td>
+                        #{usuarioEmail usuario}
+
+                    <td>
+                        #{usuarioPermissao usuario}
+
+                    <td>
+                        #{usuarioAtivo usuario}
+
+                    <td>
+                        <form action={#} method=post>
+                            <input type="submit" value="Desativar">
