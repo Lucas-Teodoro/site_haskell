@@ -17,6 +17,7 @@ formSetor = renderDivs $ (,)
 getSetorR :: Handler Html
 getSetorR = do 
     (widgetForm, enctype) <- generateFormPost formSetor
+    mensagem <- getMessage
     defaultLayout $ do
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
@@ -28,8 +29,13 @@ postSetorR = do
     case res of 
         FormSuccess (sg,setor) -> do
             _ <- runDB $ insert $ Setor sg setor True
-            redirect HomeR
-        _ -> redirect SetorR
+            setMessage [shamlet|
+                <h6>
+                    Setor cadastrado com sucesso
+            |]
+            redirect ListaSetoresR
+        _ -> redirect HomeR
+
             
 getListaSetoresR :: Handler Html
 getListaSetoresR = do 
