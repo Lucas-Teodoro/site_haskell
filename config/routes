@@ -10,5 +10,8 @@
 /processo                                ProcessoR        GET POST
 /lista                                   ListaProcessoR       GET
 
+/consultapornumero                       ConsultaPorNumR      GET POST
+
+
 /usuario                                 UsuarioR             GET POST
 /listausuarios                           ListaUsuariosR       GET
