@@ -13,6 +13,7 @@
 /consultapornumero                       ConsultaPorNumR      GET POST
 /consultaporautor                        ConsultaPorAutorR    GET POST
 /cpporautor                              CPPorAutorR          GET POST
+/cppornumero                             CPPorNumR            GET POST
 
 
 /usuario                                 UsuarioR             GET POST

@@ -99,3 +99,17 @@ getCPPorNumR = do
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
         $(whamletFile "templates/hamlet/formcpnum.hamlet")
+
+postCPPorNumR :: Handler Html
+postCPPorNumR = do
+    mensagem <- getMessage
+    ((res,_),_) <- runFormPost formConsulta'
+    case res of 
+        FormSuccess (numero,ano) -> do
+            processos <- runDB $ selectList [ProcessoAno ==. ano, ProcessoNumero ==. numero] [Asc ProcessoId]
+            defaultLayout $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/hamlet/consultaprocesso.hamlet")
+        _ -> redirect HomeR
