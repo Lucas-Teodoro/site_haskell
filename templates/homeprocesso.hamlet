@@ -1,0 +1,39 @@
+$maybe msg <- mensagem
+    #{msg}
+<div.container>
+    <div>
+        <h2> Bem vindo (a) ao GPEPP
+    <div>
+        <br>
+        <br>
+        <h2> Processos Recentes 
+    <div.table>    
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Autor
+            
+                    <th>
+                        Ano 
+            
+                    <th>
+                        Numero
+            
+                    <th>
+                        Volume
+
+            <tbody>
+                $forall (Entity _ processo) <- processos
+                    <tr>
+                        <td>
+                            #{processoAutor processo}
+                    
+                        <td>
+                            #{processoAno processo}
+                
+                        <td>
+                            #{processoNumero processo}
+                
+                        <td>
+                            #{processoVolume processo}
