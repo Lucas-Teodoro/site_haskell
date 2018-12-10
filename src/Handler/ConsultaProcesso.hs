@@ -39,3 +39,26 @@ postConsultaPorAutorR = do
                 toWidget $(luciusFile "templates/homepage.lucius")
                 $(whamletFile "templates/hamlet/consultaprocesso.hamlet")
         _ -> redirect HomeR
+
+getCPPorAutorR :: Handler Html
+getCPPorAutorR = do 
+    mensagem <- getMessage
+    (widgetForm, enctype) <- generateFormPost formConsulta
+    defaultLayout $ do
+        addStylesheet $ StaticR css_menu2_css
+        toWidget $(luciusFile "templates/homepage.lucius")
+        $(whamletFile "templates/hamlet/formcpnome.hamlet")
+
+postCPPorAutorR :: Handler Html
+postCPPorAutorR = do
+    mensagem <- getMessage
+    ((res,_),_) <- runFormPost formConsulta
+    case res of 
+        FormSuccess (autor,_) -> do
+            processos <- runDB $ selectList [Filter ProcessoAutor (Left $  concat ["%", autor, "%"]) (BackendSpecificFilter "ILIKE")] []
+            defaultLayout $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/hamlet/consultaprocesso.hamlet")
+        _ -> redirect HomeR
