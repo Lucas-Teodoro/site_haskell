@@ -1,0 +1,10 @@
+$maybe msg <- mensagem
+    <div class="alert alert-danger">
+        #{msg}
+<div.container>
+    <h2>
+        Consulta Publica de Processo por Autor
+    <div.formulario>
+        <form action=@{CPPorAutorR} method=post enctype=#{enctype}>
+            ^{widgetForm}
+            <input type="submit" value="Pesquisar">
