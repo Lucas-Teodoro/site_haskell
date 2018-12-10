@@ -4,5 +4,6 @@
 
 /                                        HomeR            GET
 /setor                                   SetorR           GET POST
+/listasetores                            ListaSetoresR        GET
 
 /processo                                ProcessoR        GET POST

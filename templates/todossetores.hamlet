@@ -1,0 +1,29 @@
+<div.container>
+    <h2>
+        Setores
+    <br>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Sigla
+            
+                <th>
+                    Setor
+                
+                <th>
+                    Editar
+            
+        <tbody>
+            $forall (Entity _ setor) <- setores
+                <tr>
+                    <td>
+                        #{setorSigla setor} 
+
+                    <td>
+                        #{setorDescSetor setor}
+    
+                    <td>
+                        <form action={#} method=post>
+                            <input type="submit" value="Editar">

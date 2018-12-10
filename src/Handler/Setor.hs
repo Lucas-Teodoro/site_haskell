@@ -31,4 +31,11 @@ postSetorR = do
             redirect HomeR
         _ -> redirect SetorR
             
+getListaSetoresR :: Handler Html
+getListaSetoresR = do 
+    setores <- runDB $ selectList [] [Asc SetorDescSetor]
+    defaultLayout $ do 
+        addStylesheet $ StaticR css_menu2_css
+        toWidget $(luciusFile "templates/homepage.lucius")
+        $(whamletFile "templates/todossetores.hamlet")
 
