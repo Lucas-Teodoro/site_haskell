@@ -1,0 +1,36 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                Autor
+            
+            <th>
+                Ano 
+            
+            <th>
+                Numero
+            
+            <th>
+                Assunto
+            
+            <th>
+                Volume
+    
+    <tbody>
+        $forall (Entity _ processo) <- processos
+            <tr>
+                <td>
+                    #{processoAutor processo}
+            
+                <td>
+                    #{processoAno processo}
+                
+                <td>
+                    #{processoNumero processo}
+                
+                <td>
+                    #{processoAssunto processo}
+
+                <td>
+                    #{processoVolume processo}
+                
