@@ -13,3 +13,14 @@ Processo json
     volume          Int
     setor           SetorId
     deriving        Show
+    
+Usuario json
+    nome            Text
+    email           Text
+    senha           Text
+    setor           SetorId
+    permissao       Bool
+    ativo           Bool
+    UniqueUsuario   nome
+    deriving        Show
+    deriving        Read

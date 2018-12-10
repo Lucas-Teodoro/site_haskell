@@ -8,3 +8,5 @@
 /teste                                   TesteR               GET POST
 
 /processo                                ProcessoR        GET POST
+
+/usuario                                 UsuarioR             GET POST
