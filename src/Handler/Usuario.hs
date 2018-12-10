@@ -49,3 +49,13 @@ postUsuarioR = do
                 |]
             redirect UsuarioR
         _ -> redirect UsuarioR
+
+getListaUsuariosR :: Handler Html
+getListaUsuariosR = do 
+    usuarios <- runDB $ selectList [] [Asc UsuarioNome]
+    layoutAdmin $ do 
+        addStylesheet $ StaticR css_menu2_css
+        addStylesheet $ StaticR css_tabela_css
+        toWidget $(luciusFile "templates/homepage.lucius")
+        $(whamletFile "templates/hamlet/todosusuarios.hamlet")
+

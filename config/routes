@@ -10,3 +10,4 @@
 /processo                                ProcessoR        GET POST
 
 /usuario                                 UsuarioR             GET POST
+/listausuarios                           ListaUsuariosR       GET
