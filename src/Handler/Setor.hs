@@ -36,7 +36,6 @@ postSetorR = do
             redirect ListaSetoresR
         _ -> redirect HomeR
 
-            
 getListaSetoresR :: Handler Html
 getListaSetoresR = do 
     setores <- runDB $ selectList [] [Asc SetorDescSetor]
