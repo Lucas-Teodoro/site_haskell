@@ -40,6 +40,7 @@ import Handler.Common
 import Handler.Home
 import Handler.Processo
 import Handler.Setor
+import Handler.Teste
 -- This line actually creates our YesodDispatch instance. It is the second half
 -- of the call to mkYesodData which occurs in Foundation.hs. Please see the
 -- comments there for more details.
