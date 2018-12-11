@@ -4,6 +4,7 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE QuasiQuotes #-}
 
 module Foundation where
 
@@ -62,3 +63,164 @@ ehUsuario = do
     case logado of 
         Just _ -> return Authorized
         Nothing -> return AuthenticationRequired
+
+layoutUser :: Widget -> Handler Html
+layoutUser widget = do
+    pc <- widgetToPageContent $ do
+        widget
+        toWidget [lucius| body { font-family: verdana } |]
+    withUrlRenderer
+        [hamlet|
+            $doctype 5
+            <html>
+                <head>
+                    <title>GPEPP - Gerenciador de Processos para Empresas de Pequeno Porte
+                    <meta charset=utf-8>
+                    ^{pageHead pc}
+                <body>
+                    <div.principal>
+                        <h1>
+                            <a.topo href=@{HomeR}>
+                                Gerenciador&nbsp;de&nbsp;Processos&nbsp;para&nbsp;Empresas&nbsp;de&nbsp;Pequeno&nbsp;Porte
+                        <div.menu>
+                            <ul>
+                                <li class="dropdown">
+                                    <div.dropbtn>
+                                        <a href="#">
+                                            Processo
+                                        <div class="dropdown-content">
+                                            <a href=@{ProcessoR}>
+                                                Cadastro de Processo
+                                            <a href=@{ConsultaPorAutorR}>
+                                                Consulta&nbsp;de&nbsp;Processo&nbsp;por&nbsp;Autor
+                                            <a href=@{ConsultaPorNumR}>
+                                                Consulta&nbsp;de&nbsp;Processo&nbsp;por&nbsp;Numero 
+                                <li class="dropdown">
+                                    <div.dropbtn>
+                                        <a href="#">
+                                            Usuarios
+                                        <div.dropdown-content>
+                                            <a href=@{ListaUsuariosR}>
+                                                Meu&nbsp;Perfil
+                                <li class="dropdown">
+                                    <div.dropbtn>
+                                        <a href="#">
+                                            Setores
+                                        <div.dropdown-content>                                            
+                                            <a href=@{ListaSetoresR}>
+                                                Consulta&nbsp;de&nbsp;Setores
+                                <li class="dropdown">
+                                    <div.dropbtn>
+                                        <a href="#">
+                                            Solicitações
+                                        <div.dropdown-content>                                            
+                                            <a href=@{HomeR}>
+                                                Consulta&nbsp;de&nbsp;Solicitacoes
+                                <li class="dropdown">
+                                    <div.dropbtn>
+                                        <a href=@{LogoutR}>
+                                            Logout
+                    <div.container>
+                        ^{pageBody pc}
+         |]
+
+layoutAdmin:: Widget -> Handler Html
+layoutAdmin widget = do
+    pc <- widgetToPageContent $ do
+        widget
+        toWidget [lucius| body { font-family: verdana } |]
+    withUrlRenderer
+        [hamlet|
+            $doctype 5
+            <html>
+                <head>
+                    <title>GPEPP - Gerenciador de Processos para Empresas de Pequeno Porte
+                    <meta charset=utf-8>
+                    ^{pageHead pc}
+                <body>
+                    <div.principal>
+                        <h1>
+                            <a href=@{HomeR}>
+                                Gerenciador&nbsp;de&nbsp;Processos&nbsp;para&nbsp;Empresas&nbsp;de&nbsp;Pequeno&nbsp;Porte
+                        <div.menu>
+                            <ul>
+                                <li.dropdown>
+                                    <div.dropbtn>
+                                        <a href="#">
+                                            Processo
+                                        <div.dropdown-content>
+                                            <a href=@{ProcessoR}>
+                                                Cadastro&nbsp;de&nbsp;Processo
+                                            <a href=@{ConsultaPorAutorR}>
+                                                Consulta&nbsp;de&nbsp;Processo&nbsp;por&nbsp;Autor
+                                            <a href=@{ConsultaPorAutorR}>
+                                                Consulta&nbsp;de&nbsp;Processo&nbsp;por&nbsp;Numero 
+                                <li.dropdown>
+                                    <div.dropbtn>
+                                        <a href="#">
+                                            Usuarios
+                                        <div.dropdown-content>
+                                            <a href=@{UsuarioR}>
+                                                Cadastro&nbsp;de&nbsp;Usuarios
+                                            <a href=@{ListaUsuariosR}>
+                                                Consulta&nbsp;de&nbsp;Usuarios
+                                <li.dropdown>
+                                    <div.dropbtn>
+                                        <a href="#">
+                                            Setores
+                                        <div.dropdown-content>                                            
+                                            <a href=@{SetorR}>
+                                                Cadastro&nbsp;de&nbsp;Setor
+                                            <a href=@{ListaSetoresR}>
+                                                Consulta&nbsp;de&nbsp;Setores
+                                <li.dropdown>
+                                    <div.dropbtn>
+                                        <a href="#">
+                                            Solicitações
+                                        <div.dropdown-content>                                            
+                                            <a href=@{HomeR}>
+                                                Consulta&nbsp;de&nbsp;Solicitacoes
+                                <li.dropdown>
+                                    <div.dropbtn>
+                                        <a href=@{LogoutR}>
+                                            Logout
+                    <div.container>
+                        ^{pageBody pc}
+         |]
+         
+layoutPublic :: Widget -> Handler Html
+layoutPublic widget = do
+    pc <- widgetToPageContent $ do
+        widget
+        toWidget [lucius| body { font-family: verdana } |]
+    withUrlRenderer
+        [hamlet|
+            $doctype 5
+            <html>
+                <head>
+                    <title>GPEPP - Gerenciador de Processos para Empresas de Pequeno Porte
+                    <meta charset=utf-8>
+                    ^{pageHead pc}
+                <body>
+                    <div.principal>
+                        <h1>
+                            <a href=@{HomeR}>
+                                Gerenciador&nbsp;de&nbsp;Processos&nbsp;para&nbsp;Empresas&nbsp;de&nbsp;Pequeno&nbsp;Porte
+                        <div.menu>
+                            <ul>
+                                <li.dropdown>
+                                    <div.dropbtn>
+                                        <a href="#">
+                                            Consulta&nbsp;de&nbsp;Processo
+                                        <div.dropdown-content>
+                                            <a href=@{CPPorAutorR}>
+                                                Por&nbsp;Autor
+                                            <a href=@{CPPorNumR}>
+                                                Por&nbsp;Número
+                                 <li.dropdown>
+                                    <div.dropbtn>
+                                        <a href=@{LoginR}>
+                                            Login
+                    <div.container>
+                        ^{pageBody pc}
+         |]
