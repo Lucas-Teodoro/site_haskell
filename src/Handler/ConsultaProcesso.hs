@@ -24,7 +24,7 @@ getConsultaPorAutorR = do
     defaultLayout $ do
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/hamlet/formconsultanome.hamlet")
+        $(whamletFile "templates/formconsultanome.hamlet")
 
 postConsultaPorAutorR :: Handler Html
 postConsultaPorAutorR = do
@@ -37,7 +37,7 @@ postConsultaPorAutorR = do
                 addStylesheet $ StaticR css_menu2_css
                 addStylesheet $ StaticR css_tabela_css
                 toWidget $(luciusFile "templates/homepage.lucius")
-                $(whamletFile "templates/hamlet/consultaprocesso.hamlet")
+                $(whamletFile "templates/consultaprocesso.hamlet")
         _ -> redirect HomeR
 
 getCPPorAutorR :: Handler Html
@@ -47,7 +47,7 @@ getCPPorAutorR = do
     defaultLayout $ do
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/hamlet/formcpnome.hamlet")
+        $(whamletFile "templates/formcpnome.hamlet")
 
 postCPPorAutorR :: Handler Html
 postCPPorAutorR = do
@@ -60,7 +60,7 @@ postCPPorAutorR = do
                 addStylesheet $ StaticR css_menu2_css
                 addStylesheet $ StaticR css_tabela_css
                 toWidget $(luciusFile "templates/homepage.lucius")
-                $(whamletFile "templates/hamlet/consultaprocesso.hamlet")
+                $(whamletFile "templates/consultaprocesso.hamlet")
         _ -> redirect HomeR
 
 formConsulta' :: Form (Int,Int)
@@ -75,7 +75,7 @@ getConsultaPorNumR = do
     defaultLayout $ do
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/hamlet/formconsultanum.hamlet")
+        $(whamletFile "templates/formconsultanum.hamlet")
 
 postConsultaPorNumR :: Handler Html
 postConsultaPorNumR = do
@@ -88,7 +88,7 @@ postConsultaPorNumR = do
                 addStylesheet $ StaticR css_menu2_css
                 addStylesheet $ StaticR css_tabela_css
                 toWidget $(luciusFile "templates/homepage.lucius")
-                $(whamletFile "templates/hamlet/consultaprocesso.hamlet")
+                $(whamletFile "templates/consultaprocesso.hamlet")
         _ -> redirect HomeR
 
 getCPPorNumR :: Handler Html
@@ -98,7 +98,7 @@ getCPPorNumR = do
     defaultLayout $ do
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/hamlet/formcpnum.hamlet")
+        $(whamletFile "templates/formcpnum.hamlet")
 
 postCPPorNumR :: Handler Html
 postCPPorNumR = do
@@ -111,5 +111,5 @@ postCPPorNumR = do
                 addStylesheet $ StaticR css_menu2_css
                 addStylesheet $ StaticR css_tabela_css
                 toWidget $(luciusFile "templates/homepage.lucius")
-                $(whamletFile "templates/hamlet/consultaprocesso.hamlet")
+                $(whamletFile "templates/consultaprocesso.hamlet")
         _ -> redirect HomeR
