@@ -1,0 +1,10 @@
+$maybe msg <- mensagem
+    <div class="alert alert-danger">
+        #{msg}
+<div.container>
+    <h2>
+        Login
+    <div.formulario>
+        <form action=@{LoginR} method=post enctype=#{enctype}>
+            ^{widgetForm}
+            <input.botao type="submit" value="Logar">

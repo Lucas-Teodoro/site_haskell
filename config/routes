@@ -17,3 +17,5 @@
 
 /usuario                                 UsuarioR             GET POST
 /listausuarios                           ListaUsuariosR       GET
+
+/login                                   LoginR               GET POST

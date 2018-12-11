@@ -39,6 +39,7 @@ import System.Log.FastLogger                (defaultBufSize, newStdoutLoggerSet,
 import Handler.Common
 import Handler.ConsultaProcesso
 import Handler.Home
+import Handler.Login
 import Handler.Processo
 import Handler.Setor
 import Handler.Teste
