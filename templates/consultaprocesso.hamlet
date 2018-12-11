@@ -1,0 +1,44 @@
+$maybe msg <- mensagem
+    #{msg}
+<div.container>
+    <div>
+        <h2> Consulta de Processos
+    <div>
+        <br>
+        <br>
+    <div.table>    
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Autor
+            
+                    <th>
+                        Ano 
+            
+                    <th>
+                        Numero
+            
+                    <th>
+                        Volume
+                        
+                    <th>
+                        Data de Criação
+
+            <tbody>
+                $forall (Entity _ processo) <- processos
+                    <tr>
+                        <td>
+                            #{processoAutor processo}
+                    
+                        <td>
+                            #{processoAno processo}
+                
+                        <td>
+                            #{processoNumero processo}
+                
+                        <td>
+                            #{processoVolume processo}
+
+                        <td>
+                            #{dateFormat $ processoCriacao processo}

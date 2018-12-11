@@ -9,7 +9,7 @@ Processo json
     ano             Int
     numero          Int
     assunto         Text
-    dataCriacao     Day
+    criacao         Day
     volume          Int
     setor           SetorId
     deriving        Show

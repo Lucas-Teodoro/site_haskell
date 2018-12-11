@@ -39,7 +39,7 @@ postProcessoR = do
 getListaProcessoR :: Handler Html
 getListaProcessoR = do 
     processos <- runDB $ selectList [] [Asc ProcessoAutor]
-    layoutAdmin $ do 
+    defaultLayout $ do 
         addStylesheet $ StaticR css_menu2_css
         addStylesheet $ StaticR css_tabela_css
         toWidget $(luciusFile "templates/homepage.lucius")
