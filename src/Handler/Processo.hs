@@ -43,4 +43,4 @@ getListaProcessoR = do
         addStylesheet $ StaticR css_menu2_css
         addStylesheet $ StaticR css_tabela_css
         toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/hamlet/todosprocessos.hamlet")
+        $(whamletFile "templates/todosprocessos.hamlet")
