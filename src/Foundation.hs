@@ -10,6 +10,7 @@ module Foundation where
 import Import.NoFoundation
 import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Yesod.Core.Types     (Logger)
+import Prelude              (read)
 
 data App = App
     { appSettings    :: AppSettings
@@ -28,9 +29,6 @@ instance Yesod App where
     authRoute _ = Just HomeR
     isAuthorized (StaticR _) _ = return Authorized
     isAuthorized _ _ = return Authorized
-
-instance Yesod App where
-    makeLogger = return . appLogger
 
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend
