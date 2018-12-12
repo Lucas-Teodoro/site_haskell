@@ -131,3 +131,8 @@ input{
     display:none;
     visibility:hidden;
 }
+h6{
+  text-align: left !important;
+  font-size: 15px;
+  color: RED;
+}
