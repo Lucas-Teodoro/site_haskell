@@ -29,8 +29,13 @@ instance Yesod App where
     makeLogger = return . appLogger
     authRoute _ = Just HomeR
     isAuthorized (StaticR _) _ = return Authorized
-    isAuthorized SetorR _ = ehAdmin
-    isAuthorized _ _ = return Authorized
+    isAuthorized HomeR _ = return Authorized
+    isAuthorized CPPorAutorR _ = return Authorized
+    isAuthorized CPPorNumR _ = return Authorized
+    isAuthorized LoginR _ = return Authorized
+    isAuthorized LogoutR _ = ehUsuario
+    isAuthorized ListaSetoresR _ = ehUsuario
+    isAuthorized _ _ = ehAdmin
 
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend
@@ -46,12 +51,10 @@ instance HasHttpManager App where
 
 ehAdmin :: Handler AuthResult
 ehAdmin = do 
-    logado <- lookupSession "_ADM"
+    logado <- lookupSession "_USR"
     case logado of 
         Just usuario -> do
-            setorLog <- return $ usuarioSetor $ read $ unpack usuario
             permissao <- return $ usuarioPermissao $ read $ unpack usuario
-            let usPermissao = permissao
 --                  True == Admin 
             if permissao == True then 
                 return Authorized

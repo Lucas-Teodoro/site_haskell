@@ -56,11 +56,11 @@ postLoginR = do
         _ -> redirect HomeR            
 
 postLogoutR :: Handler Html
-postLogoutR = do 
+postLogoutR = do
     deleteSession "_USR"
-    redirect SetorR
+    redirect HomeR
     
 getLogoutR:: Handler Html
 getLogoutR = do
     deleteSession "_USR"
-    redirect SetorR
+    redirect HomeR

@@ -17,11 +17,20 @@ formSetor = renderDivs $ (,)
 getSetorR :: Handler Html
 getSetorR = do 
     (widgetForm, enctype) <- generateFormPost formSetor
+    logado <- lookupSession "_USR"
     mensagem <- getMessage
-    defaultLayout $ do
-        addStylesheet $ StaticR css_menu2_css
-        toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/setor.hamlet")
+    case logado of
+        Just "ADMIN" -> do
+            layoutAdmin $ do
+                addStylesheet $ StaticR css_menu2_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/setor.hamlet")
+        _ -> do
+            layoutUser $ do
+                addStylesheet $ StaticR css_menu2_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/setor.hamlet")
+
     
 postSetorR :: Handler Html 
 postSetorR = do 
@@ -38,10 +47,18 @@ postSetorR = do
 
 getListaSetoresR :: Handler Html
 getListaSetoresR = do 
+    logado <- lookupSession "_USR"
     setores <- runDB $ selectList [] [Asc SetorDescSetor]
-    defaultLayout $ do 
-        addStylesheet $ StaticR css_menu2_css
-        addStylesheet $ StaticR css_tabela_css
-        toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/todossetores.hamlet")
-
+    case logado of
+        Just "ADMIN" -> do
+            layoutAdmin $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/todossetores.hamlet")
+        _ -> do
+            layoutUser $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/todossetores.hamlet")

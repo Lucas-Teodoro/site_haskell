@@ -1,9 +1,8 @@
 body {
     margin: 10px;
-    background-color: white;
+    background-color: #DCDCDC;
     margin-bottom: 45px;
     text-align: center;
-    background-image: url("config/engrenagem-helicoidal.jpg");
 }
 div a {
     color: black; /* Black text color */
@@ -49,6 +48,7 @@ li a, .dropbtn {
     text-decoration: none;
 }
 .container{
+    content: hidden;
     text-align: center;
 }
 head{
@@ -56,8 +56,11 @@ head{
 }
 
 .dropdown {
+    list-style:none;    
     position: relative;
     display: inline-block;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
 }
 .dropdown-content{
     display: none;
@@ -65,9 +68,7 @@ head{
     min-width: 100%;
     z-index: 0;
 }
-
 .dropbtn {
-    color: white;
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -76,13 +77,14 @@ head{
 
 .dropdown:hover .dropdown-content {
     display: block;
+    background-color: #f5f5dc !important;
 }
 form div {
     padding: 5px;
 }
 .formulario{
     text-align: left !Important;
-    color: #787c80;
+    color: #000000;
 	font-weight: bolder;
 	width: 550px;
 	margin: 0 auto;
@@ -122,4 +124,10 @@ input{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
+}
+
+.hideme
+{
+    display:none;
+    visibility:hidden;
 }
