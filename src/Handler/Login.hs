@@ -31,7 +31,7 @@ postLoginR = do
             logado <- runDB $ selectFirst [UsuarioEmail ==. email,
                                           UsuarioSenha ==. senha] []
             case logado of
-                Just (Entity _ (Usuario a b c d e f)) -> do
+                Just (Entity us (Usuario a b c d e f)) -> do
                     case (Just e) of
                         Just False -> do
                             setSession "_USR" (pack $ show $ Usuario a b c d e f)
