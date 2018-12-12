@@ -15,8 +15,23 @@ getHomeR = do
     logado <- lookupSession "_USR"
     listaprocessos <- runDB $ selectList [] [Desc ProcessoCriacao]
     let processos = take 5 listaprocessos
-    defaultLayout $ do
-        addStylesheet $ StaticR css_menu2_css
-        addStylesheet $ StaticR css_tabela_css
-        toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/homeprocesso.hamlet")
+    case logado of
+        Nothing -> do
+            layoutPublic $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/homeprocesso.hamlet")
+        Just "ADMIN" -> do
+            layoutAdmin $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/homeprocesso.hamlet")
+        _ -> do
+            layoutUser $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/homeprocesso.hamlet")
+                        

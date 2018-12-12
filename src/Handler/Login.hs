@@ -22,7 +22,7 @@ getLoginR = do
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
         $(whamletFile "templates/login.hamlet")
-    
+
 postLoginR :: Handler Html 
 postLoginR = do 
     ((res,_),_) <- runFormPost formLogin
@@ -31,22 +31,36 @@ postLoginR = do
             logado <- runDB $ selectFirst [UsuarioEmail ==. email,
                                           UsuarioSenha ==. senha] []
             case logado of
-                Just (Entity _ usuario) -> do 
-                    setSession "_USR" (pack $ show usuario)
+                Just (Entity _ (Usuario a b c d e f)) -> do
+                    case (Just e) of
+                        Just False -> do
+                            setSession "_USR" (pack $ show (Usuario a b c d e f))
+                            setMessage [shamlet|
+                                <h6>
+                                    Usuario logado
+                            |]
+                            redirect HomeR
+                        _ -> do
+                            setSession "_USR" "ADMIN"
+                            setMessage [shamlet|
+                                <h6>
+                                    Administrador logado
+                            |]  
+                            redirect HomeR
+                _ -> do
                     setMessage [shamlet|
-                        <h1>
-                            Usuario logado
-                    |]
-                    redirect HomeR
-                Nothing -> do 
-                    setMessage [shamlet|
-                        <h1>
+                        <h6>
                             Usuario e senha nao encontrados!
                     |]
                     redirect LoginR
-        _ -> redirect HomeR
+        _ -> redirect HomeR            
 
 postLogoutR :: Handler Html
 postLogoutR = do 
     deleteSession "_USR"
-    redirect HomeR
+    redirect SetorR
+    
+getLogoutR:: Handler Html
+getLogoutR = do
+    deleteSession "_USR"
+    redirect SetorR

@@ -19,4 +19,4 @@
 /listausuarios                           ListaUsuariosR       GET
 
 /login                                   LoginR               GET POST
-/logout                                  LogoutR              POST
+/logout                                  LogoutR              GET POST

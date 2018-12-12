@@ -29,6 +29,7 @@ instance Yesod App where
     makeLogger = return . appLogger
     authRoute _ = Just HomeR
     isAuthorized (StaticR _) _ = return Authorized
+    isAuthorized SetorR _ = ehAdmin
     isAuthorized _ _ = return Authorized
 
 instance YesodPersist App where
@@ -45,15 +46,16 @@ instance HasHttpManager App where
 
 ehAdmin :: Handler AuthResult
 ehAdmin = do 
-    logado <- lookupSession "_USR"
+    logado <- lookupSession "_ADM"
     case logado of 
         Just usuario -> do
             setorLog <- return $ usuarioSetor $ read $ unpack usuario
             permissao <- return $ usuarioPermissao $ read $ unpack usuario
+            let usPermissao = permissao
 --                  True == Admin 
             if permissao == True then 
                 return Authorized
-            else 
+            else
                 return $ Unauthorized "Acesso negado!"
         Nothing -> return AuthenticationRequired
 
@@ -89,8 +91,6 @@ layoutUser widget = do
                                         <a href="#">
                                             Processo
                                         <div class="dropdown-content">
-                                            <a href=@{ProcessoR}>
-                                                Cadastro de Processo
                                             <a href=@{ConsultaPorAutorR}>
                                                 Consulta&nbsp;de&nbsp;Processo&nbsp;por&nbsp;Autor
                                             <a href=@{ConsultaPorNumR}>
