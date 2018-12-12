@@ -18,7 +18,7 @@ getLoginR :: Handler Html
 getLoginR = do 
     (widgetForm, enctype) <- generateFormPost formLogin
     mensagem <- getMessage
-    defaultLayout $ do 
+    layoutPublic $ do 
         addStylesheet $ StaticR css_menu2_css
         toWidget $(luciusFile "templates/homepage.lucius")
         $(whamletFile "templates/login.hamlet")

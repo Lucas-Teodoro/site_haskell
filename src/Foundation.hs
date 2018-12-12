@@ -33,9 +33,10 @@ instance Yesod App where
     isAuthorized CPPorAutorR _ = return Authorized
     isAuthorized CPPorNumR _ = return Authorized
     isAuthorized LoginR _ = return Authorized
-    isAuthorized LogoutR _ = ehUsuario
-    isAuthorized ListaSetoresR _ = ehUsuario
-    isAuthorized _ _ = ehAdmin
+    isAuthorized UsuarioR _ = ehAdmin
+    isAuthorized ProcessoR _ = ehAdmin
+    isAuthorized SetorR _ = ehAdmin
+    isAuthorized _ _ = ehUsuario
 
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend

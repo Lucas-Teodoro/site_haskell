@@ -1,0 +1,18 @@
+
+<div.container>
+    <h2>
+        Processos
+    <table class="table">
+               <thead>
+                    <tr>
+                        <th>
+                            AUTOR
+                        <th>
+                            E-MAIL
+                <tbody>
+                    $forall (Entity _ processo) <- processos
+                        <tr>
+                            <td>
+                                #{processoAutor processo}
+                            <td>
+                                #{processoNumero processo}
