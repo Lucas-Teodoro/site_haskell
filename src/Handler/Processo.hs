@@ -22,11 +22,15 @@ formProcesso = renderDivs $ Processo
 getProcessoR :: Handler Html
 getProcessoR = do 
     (widgetForm, enctype) <- generateFormPost formProcesso
-    defaultLayout $ do
-        addStylesheet $ StaticR css_menu2_css
-        toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/processo.hamlet")
-    
+    logado <- lookupSession "_USR"
+    case logado of
+        Just "ADMIN" -> do
+            layoutAdmin $ do
+                addStylesheet $ StaticR css_menu2_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/processo.hamlet")
+        _ -> redirect HomeR
+        
 postProcessoR :: Handler Html 
 postProcessoR = do
     ((res,_),_) <- runFormPost formProcesso
@@ -39,8 +43,17 @@ postProcessoR = do
 getListaProcessoR :: Handler Html
 getListaProcessoR = do 
     processos <- runDB $ selectList [] [Asc ProcessoAutor]
-    defaultLayout $ do 
-        addStylesheet $ StaticR css_menu2_css
-        addStylesheet $ StaticR css_tabela_css
-        toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/todosprocessos.hamlet")
+    logado <- lookupSession "_USR"
+    case logado of
+        Just "ADMIN" -> do
+            layoutAdmin $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/todosprocessos.hamlet")
+        _ -> do
+            layoutUser $ do
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/todosprocessos.hamlet")

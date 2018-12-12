@@ -16,12 +16,25 @@ formLogin = renderDivs $ (,)
 
 getLoginR :: Handler Html
 getLoginR = do 
+    logado <- lookupSession "_USR"
     (widgetForm, enctype) <- generateFormPost formLogin
     mensagem <- getMessage
-    layoutPublic $ do 
-        addStylesheet $ StaticR css_menu2_css
-        toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/login.hamlet")
+    case logado of
+        Nothing -> do
+            layoutPublic $ do
+                addStylesheet $ StaticR css_menu2_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/login.hamlet")
+        Just "ADMIN" -> do
+            layoutAdmin $ do
+                addStylesheet $ StaticR css_menu2_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/login.hamlet")
+        _ -> do
+            layoutUser $ do
+                addStylesheet $ StaticR css_menu2_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/login.hamlet")
 
 postLoginR :: Handler Html 
 postLoginR = do 
