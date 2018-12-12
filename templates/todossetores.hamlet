@@ -11,10 +11,7 @@
             
                 <th>
                     Setor
-                
-                <th>
-                    Editar
-            
+
         <tbody>
             $forall (Entity _ setor) <- setores
                 <tr>
@@ -23,7 +20,3 @@
 
                     <td>
                         #{setorDescSetor setor}
-    
-                    <td>
-                        <form action={#} method=post>
-                            <input type="submit" value="Editar">

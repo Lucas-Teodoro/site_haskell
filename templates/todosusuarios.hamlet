@@ -18,9 +18,6 @@
                 <th>
                     Ativo
 
-                <th>
-                    Desativar
-
         <tbody>
             $forall (Entity _ usuario) <- usuarios
                 <tr>
@@ -35,7 +32,3 @@
 
                     <td>
                         #{usuarioAtivo usuario}
-
-                    <td>
-                        <form action={#} method=post>
-                            <input type="submit" value="Desativar">
