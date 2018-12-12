@@ -38,7 +38,7 @@ instance Yesod App where
     isAuthorized ConsultaPorAutorR _ = ehUsuario
     isAuthorized ConsultaPorNumR _ = ehUsuario
     isAuthorized LogoutR _ = ehUsuario
-    isAuthorized _ _ = ehAdmin
+    isAuthorized _ _ = ehUsuario
 
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend
@@ -104,24 +104,10 @@ layoutUser widget = do
                                 <li class="dropdown">
                                     <div.dropbtn>
                                         <a href="#">
-                                            Usuarios
-                                        <div.dropdown-content>
-                                            <a href=@{ListaUsuariosR}>
-                                                Meu&nbsp;Perfil
-                                <li class="dropdown">
-                                    <div.dropbtn>
-                                        <a href="#">
                                             Setores
                                         <div.dropdown-content>                                            
                                             <a href=@{ListaSetoresR}>
                                                 Consulta&nbsp;de&nbsp;Setores
-                                <li class="dropdown">
-                                    <div.dropbtn>
-                                        <a href="#">
-                                            Solicitações
-                                        <div.dropdown-content>                                            
-                                            <a href=@{HomeR}>
-                                                Consulta&nbsp;de&nbsp;Solicitacoes
                                 <li class="dropdown">
                                     <div.dropbtn>
                                         <a href=@{LogoutR}>
@@ -179,13 +165,6 @@ layoutAdmin widget = do
                                                 Cadastro&nbsp;de&nbsp;Setor
                                             <a href=@{ListaSetoresR}>
                                                 Consulta&nbsp;de&nbsp;Setores
-                                <li.dropdown>
-                                    <div.dropbtn>
-                                        <a href="#">
-                                            Solicitações
-                                        <div.dropdown-content>                                            
-                                            <a href=@{HomeR}>
-                                                Consulta&nbsp;de&nbsp;Solicitacoes
                                 <li.dropdown>
                                     <div.dropbtn>
                                         <a href=@{LogoutR}>
