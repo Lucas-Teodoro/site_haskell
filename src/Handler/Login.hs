@@ -34,7 +34,7 @@ postLoginR = do
                 Just (Entity _ (Usuario a b c d e f)) -> do
                     case (Just e) of
                         Just False -> do
-                            setSession "_USR" (pack $ show (Usuario a b c d e f))
+                            setSession "_USR" (pack $ show $ Usuario a b c d e f)
                             setMessage [shamlet|
                                 <h6>
                                     Usuario logado

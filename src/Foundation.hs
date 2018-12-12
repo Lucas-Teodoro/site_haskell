@@ -33,10 +33,12 @@ instance Yesod App where
     isAuthorized CPPorAutorR _ = return Authorized
     isAuthorized CPPorNumR _ = return Authorized
     isAuthorized LoginR _ = return Authorized
-    isAuthorized UsuarioR _ = ehAdmin
-    isAuthorized ProcessoR _ = ehAdmin
-    isAuthorized SetorR _ = ehAdmin
-    isAuthorized _ _ = ehUsuario
+    isAuthorized TesteR _ = return Authorized
+    isAuthorized ListaSetoresR _ = ehUsuario
+    isAuthorized ConsultaPorAutorR _ = ehUsuario
+    isAuthorized ConsultaPorNumR _ = ehUsuario
+    isAuthorized LogoutR _ = ehUsuario
+    isAuthorized _ _ = ehAdmin
 
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend
@@ -54,14 +56,14 @@ ehAdmin :: Handler AuthResult
 ehAdmin = do 
     logado <- lookupSession "_USR"
     case logado of 
+        Nothing -> return AuthenticationRequired
         Just usuario -> do
             permissao <- return $ usuarioPermissao $ read $ unpack usuario
 --                  True == Admin 
-            if permissao == True then 
+            if permissao == True then do
                 return Authorized
             else
                 return $ Unauthorized "Acesso negado!"
-        Nothing -> return AuthenticationRequired
 
 ehUsuario :: Handler AuthResult
 ehUsuario = do 

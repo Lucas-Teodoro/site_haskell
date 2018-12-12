@@ -22,13 +22,17 @@ formUsuario = renderDivs $ (,)
     <*> areq passwordField "Confirmacao de Senha: " Nothing
 
 getUsuarioR :: Handler Html
-getUsuarioR = do 
+getUsuarioR = do
+    logado <- lookupSession "_USR"
     (widgetForm, enctype) <- generateFormPost formUsuario
     mensagem <- getMessage
-    defaultLayout $ do
-        addStylesheet $ StaticR css_menu2_css
-        toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/usuario.hamlet")
+    case logado of
+        Nothing -> redirect HomeR
+        _ -> do
+            layoutAdmin $ do 
+                addStylesheet $ StaticR css_menu2_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/usuario.hamlet")
     
 postUsuarioR :: Handler Html 
 postUsuarioR = do 
@@ -52,10 +56,14 @@ postUsuarioR = do
 
 getListaUsuariosR :: Handler Html
 getListaUsuariosR = do 
+    logado <- lookupSession "_USR"
     usuarios <- runDB $ selectList [] [Asc UsuarioNome]
-    defaultLayout $ do 
-        addStylesheet $ StaticR css_menu2_css
-        addStylesheet $ StaticR css_tabela_css
-        toWidget $(luciusFile "templates/homepage.lucius")
-        $(whamletFile "templates/todosusuarios.hamlet")
-
+    case logado of
+        Just _ -> do
+            layoutAdmin $ do 
+                addStylesheet $ StaticR css_menu2_css
+                addStylesheet $ StaticR css_tabela_css
+                toWidget $(luciusFile "templates/homepage.lucius")
+                $(whamletFile "templates/todosusuarios.hamlet")
+        Nothing -> redirect HomeR
+        
